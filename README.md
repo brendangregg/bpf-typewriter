@@ -7,7 +7,7 @@ This works by tracing the Linux tty driver using kprobes. I first wrote tracing-
 ## Dependencies
 
 - [bpftrace]
-- alsa-utils for the `aplay` command. Don't want alsa-utils? Edit the source to use a different audio player.
+- alsa-utils for the `aplay` command. If you don't want to use alsa-utils, you can edit the source to use a different audio player.
 
 ## Source
 
@@ -29,7 +29,7 @@ kprobe:kbd_event
 
 ```
 
-I would have traced kbd_rawcode(), but it appears inlined and unavailable to kprobes.
+I would have traced kbd_rawcode(), but it appears inlined and unavailable to kprobes. The --unsafe option is necessary because this tool is launching commands via system().
 
 [bpftrace]: https://github.com/iovisor/bpftrace
 [2005]: http://www.brendangregg.com/specials.html#typewriter
