@@ -1,0 +1,22 @@
+#!/usr/local/bin/bpftrace --unsafe
+/*
+ * typewriter.bt	Noisy typewriter in BPF
+ *
+ * Copyright (c) 2019 Brendan Gregg.
+ * Licensed under the Apache License, Version 2.0 (the "License").
+ *
+ * 22-Dec-2019	Brendan Gregg	Created this.
+ */
+
+// if you're missing this header, try EV_KEY=1 and KEY_ENTER=28 instead
+#include <uapi/linux/input-event-codes.h>
+
+kprobe:kbd_event
+/arg1 == EV_KEY && arg3 == 1/
+{
+	if (arg2 == KEY_ENTER) {
+		system("aplay -q clink.au >/dev/null 2>&1 &");
+	} else {
+		system("aplay -q click.au >/dev/null 2>&1 &");
+	}
+}
