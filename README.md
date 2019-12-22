@@ -7,7 +7,7 @@ This works by tracing the Linux tty driver using kprobes. I first wrote tracing-
 ## Dependencies
 
 - [bpftrace]
-- alsa-utils for the `aplay` command. If you don't want to use alsa-utils, you can edit the source to use a different audio player.
+- alsa-utils for the `aplay` command. You can edit the source to use a different audio player.
 
 ## Source
 
